@@ -8,6 +8,7 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     private int gameType=0;
     private boolean needMusic = false;
+    private Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,11 +31,12 @@ public class MainActivity extends AppCompatActivity {
         Button medium_btn = findViewById(R.id.medium_btn);
         Button easy_btn = findViewById(R.id.easy_btn);
         Button hard_btn = findViewById(R.id.hard_btn);
+        Button connect_btn = findViewById(R.id.connect_btn);
         CheckBox music_cb = findViewById(R.id.music_cb);
 
         getScreenHW();
 
-        Intent intent = new Intent(MainActivity.this, GameActivity.class);
+        intent = new Intent(MainActivity.this, GameActivity.class);
 
         easy_btn.setOnClickListener(view -> {
             gameType =1;
@@ -54,6 +57,9 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra("gameType",gameType);
             intent.putExtra("needMusic",needMusic);
             startActivity(intent);
+        });
+        connect_btn.setOnClickListener(view -> {
+            Toast.makeText(getBaseContext(),"等待联机中", Toast.LENGTH_SHORT).show();
         });
         music_cb.setOnClickListener(view -> {
             needMusic = !needMusic;
